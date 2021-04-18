@@ -30,6 +30,15 @@ RUN pip3 install llvmlite
 # INSTALL OPENCV
 # ==============
 # This one is redundant but let's install it to not overwrite CUDA-enabled contrib version later
+RUN apt install -y \
+        tesseract-ocr \
+        libtesseract-dev \
+        libatlas-base-dev \
+        libhdf5-dev \
+        libhdf5-serial-dev \
+        libatlas-base-dev \
+        libqtgui4 \
+        libqt4-test
 RUN pip3 install opencv-python
 COPY ${PWD}/wheels /wheels
 RUN pip3 install /wheels/opencv_contrib_python-4.5.1.48-cp38-cp38-linux_aarch64.whl --verbose
