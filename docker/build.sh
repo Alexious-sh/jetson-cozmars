@@ -1,8 +1,7 @@
-cp /etc/apt/trusted.gpg.d/jetson-ota-public.asc ../.. # copy to jetbot root
+#!/bin/bash
 
 sudo docker build \
-    --build-arg BASE_IMAGE=nvcr.io/nvidia/l4t-pytorch:r32.5.0-pth1.6-py3 \
+    --build-arg BASE_IMAGE=nvcr.io/nvidia/l4t-base:r32.5.0 \
     -t cozmars:1.0 \
     -f Dockerfile \
     ..  # repo root as context
-

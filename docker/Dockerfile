@@ -1,4 +1,4 @@
-ARG BASE_IMAGE="nvcr.io/nvidia/l4t-pytorch:r32.5.0-pth1.6-py3"
+ARG BASE_IMAGE="nvcr.io/nvidia/l4t-base:r32.5.0"
 FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # ====================
 # INSTALL COMMON TOOLS
 # ====================
-RUN apt-get update && apt-get install -y net-tools vim cmake git wget
+RUN apt-get update && apt-get install -y net-tools vim cmake git wget build-essential
 
 # =======================
 # INSTALL PYTHON 3.8 venv
@@ -49,6 +49,3 @@ RUN rm -rf /wheels
 # ===============
 RUN apt install -y ffmpeg
 RUN pip3 install rcute-cozmars
-
-# Jupyter kernel might crash without it
-ENV LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libgomp.so.1
