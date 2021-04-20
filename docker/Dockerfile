@@ -26,10 +26,9 @@ RUN apt install -y --no-install-recommends llvm-9 llvm-9-dev
 ENV LLVM_CONFIG=/usr/bin/llvm-config-9
 RUN pip3 install llvmlite
 
-# ==============
-# INSTALL OPENCV
-# ==============
-# This one is redundant but let's install it to not overwrite CUDA-enabled contrib version later
+# =====================================
+# INSTALL OPENCV & REST PREBUILT WHEELS
+# =====================================
 RUN apt install -y \
         tesseract-ocr \
         libtesseract-dev \
@@ -39,13 +38,21 @@ RUN apt install -y \
         libatlas-base-dev \
         libqtgui4 \
         libqt4-test
+# This one is redundant but let's install it to not overwrite CUDA-enabled contrib version later
 RUN pip3 install opencv-python
 COPY ${PWD}/wheels /wheels
-RUN pip3 install /wheels/opencv_contrib_python-4.5.1.48-cp38-cp38-linux_aarch64.whl --verbose
+RUN pip3 install /wheels/*.whl --verbose
 RUN rm -rf /wheels
 
-# ===============
-# INSTALL COZMARS
-# ===============
+# =====================
+# INSTALL RCUTE-COZMARS
+# =====================
 RUN apt install -y ffmpeg
 RUN pip3 install rcute-cozmars
+
+# ================
+# INSTALL RCUTE-AI
+# ================
+RUN apt install -y portaudio19-dev espeak libespeak1
+RUN pip3 install https://github.com/alphacep/vosk-api/releases/download/0.3.21/vosk-0.3.21-py3-none-linux_aarch64.whl
+RUN pip3 install rcute-ai
