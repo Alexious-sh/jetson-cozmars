@@ -79,4 +79,8 @@ WORKDIR ..
 # ================
 RUN apt update && apt install -y espeak libespeak1
 RUN pip3 install https://github.com/alphacep/vosk-api/releases/download/0.3.21/vosk-0.3.21-py3-none-linux_aarch64.whl
-RUN pip3 install rcute-ai
+#RUN pip3 install rcute-ai
+RUN git clone https://github.com/r-cute/rcute-ai.git
+WORKDIR rcute-ai
+RUN pip3 install .
+WORKDIR ..
