@@ -1,4 +1,4 @@
-ARG BASE_IMAGE="nvcr.io/nvidia/l4t-base:r32.5.0"
+ARG BASE_IMAGE="nvcr.io/nvidia/l4t-base:r32.6.1"
 FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive
